@@ -57,6 +57,40 @@ void topological(map<int,vector<int>>& graph)
     cout<<"\n";
 }
 
+
+void dfs_graph(int node,map<int,vector<int>>& graph,map<int,bool>& b)
+{
+    cout<<node<<" ";
+    b[node]=true;
+    for(int i=0;i<graph[node].size();i++)
+    {
+        if(!b[graph[node][i]])
+        {
+            dfs_graph(graph[node][i],graph,b);
+        }
+    }
+
+}
+
+void bfs_graph(int node,map<int,vector<int>>& graph,map<int,bool>& b)
+{
+    b[node]=true;
+    queue<int> q;
+    q.push(node);
+    while(q.size())
+    {
+        cout<<q.front()<<" ";
+        for(int i=0;i<graph[q.front()].size();i++)
+        {
+            if(!b[graph[q.front()][i]])
+                q.push(graph[q.front()][i]);
+            b[graph[q.front()][i]]=true;
+        }
+        q.pop();
+    }
+
+}
+
 void solution()
 {
     long long int n;
